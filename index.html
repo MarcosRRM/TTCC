@@ -1,0 +1,241 @@
+<html>
+  <head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+
+    <title>Report</title>
+
+    <style>
+
+      :root{
+        --black: #0D0D0D;
+      }
+      *{
+        box-sizing: border-box;
+      }
+      body{
+        padding: 0px;
+        margin: 0px;
+        background-color: var(--black);
+        width: calc(100vw - (100vw - 100%));
+        min-height: 100vh;
+        font-family: 'Source Sans Pro', sans-serif;
+      }
+
+      ._flexCentered{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .NavBar {
+        position: fixed; top: 0; left: 0; z-index: 1000;
+        background-color: var(--black);
+        width: 100%;
+        height: 70px;
+      }
+
+      .NavBar.Desktop{
+        display: none;
+      }
+      .Desktop .Menu{
+        font-family: 'Roboto Slab', serif;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        font-weight: bold;
+      }
+      .Desktop .Menu{
+        font-size: 20px;
+      }
+      .Desktop .Menu>div:not(:last-child){
+        margin-right: 20px;
+      }
+
+      .Mobile .MenuButton{
+        position: fixed;
+        top: 7px;
+        right: 5px;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+      .Mobile .MenuButton svg{
+        border-radius: 5px;
+        border: solid 2px white;
+      }
+      .Menu{
+        position: fixed;
+        top: 70px;
+        flex-direction: column;
+        align-items: flex-end;
+        font-size: 20px;
+        background-color: var(--black);
+        padding: 10px 5px 2px 10px;
+        /* max-height: 0px;
+        max-width: 0px; */
+      }
+      .Mobile .MenuButton .Menu>div:not(:last-child){
+        margin-bottom: 5px;
+      }
+      .Menu{
+        color: white;
+      }
+
+      .Menu>div{
+        cursor: pointer;
+      }
+
+      .Logo{
+        z-index: 1000;
+        position: fixed;
+        top: 7px;
+        left: 5px;
+        height: 56px;
+        justify-content: flex-start;
+        font-family: 'Roboto Slab', serif;
+        color: white;
+        font-size: 25px;
+      }
+      .Logo img{
+        height: 100%;
+        margin-right: 10px;
+      }
+
+      .ContentSection{
+        margin-top: 70px;
+        width: 100%;
+        min-height: calc(100vh - 70px);
+        flex-direction: column;
+      }
+
+      .Separator{
+        font-family: 'Roboto Slab', serif;
+        position: relative;
+        width: 100%;
+        padding: 0px;
+      }
+      .Separator img{
+        width: 100%;
+      }
+      .Separator div{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color:white;
+        font-size: 60px;
+        text-align: center;
+      }
+      .Separator span.SubTitle{
+        font-size: 30px;
+        white-space: nowrap;
+      }
+
+      .TextSection{
+        width: 100%;
+        padding: 20px 10px;
+      }
+
+      .TextSection>div{
+        width: 80%;
+        max-width: 1000px;
+        background-color: #FFFFFF;
+        text-align: justify;
+        padding: 25px;
+      }
+
+      .YoutubeIFrame{
+        width: 100%;
+        height: calc(60vw - 70px);
+        max-height: 450px;
+      }
+
+      /* @media (min-width: 760px) { */
+      @media (min-width: 1200px) {
+        .NavBar.Mobile{ display: none; }
+        .NavBar.Desktop{ display: flex; }
+      }
+
+    </style>
+    <script>
+      window.addEventListener('load',()=>{
+        document.querySelectorAll('div.TextSection>div').forEach(x=>x.innerHTML += `
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod et velit vitae vulputate. Morbi volutpat, neque quis mollis varius, tortor quam fringilla magna, eget lacinia tortor nunc eget est. Sed nec nibh at mi mollis volutpat in non diam. Donec non lacus ac ipsum cursus venenatis nec eget dui. Sed bibendum sed justo quis convallis. Phasellus sollicitudin eu lectus sit amet tristique. Curabitur posuere vulputate velit, ac tempus mi laoreet in. Curabitur a tortor nec massa tincidunt luctus vitae sed quam. In auctor facilisis sollicitudin. Aliquam erat volutpat. Proin accumsan dolor nec felis ullamcorper euismod. Morbi maximus ex augue, vel varius dui imperdiet vitae. Curabitur felis nisi, convallis eu massa non, interdum finibus velit. Quisque orci eros, elementum nec risus id, auctor sollicitudin justo. Donec at dolor vitae sem cursus tempor. Nulla malesuada vel metus ac mattis.</p>
+<p>Curabitur et bibendum sem, ut volutpat nisl. Etiam eu urna eu odio molestie finibus sit amet vel neque. Donec gravida dolor eu mauris blandit auctor. Ut accumsan, nunc sit amet pellentesque mollis, sem nulla ullamcorper felis, sed varius augue libero sed orci. Suspendisse ultricies rutrum ullamcorper. Nullam accumsan elit eu tincidunt tincidunt. Aliquam feugiat porta nisl, pharetra aliquam arcu tempus a. Vivamus pretium lectus dolor, nec dignissim enim tempus id. Suspendisse id porta tellus, ac molestie quam.</p>
+<p>Suspendisse ut egestas sapien. Nam sollicitudin in ante eget maximus. Morbi condimentum risus urna, a malesuada elit suscipit ac. Maecenas eu dolor dapibus, bibendum nunc non, vulputate justo. Praesent iaculis molestie nulla eget facilisis. Praesent eget pellentesque lorem. Nullam quis erat vestibulum, scelerisque eros id, accumsan ex. Duis in ipsum orci. Maecenas congue consectetur porttitor. In ac lorem accumsan, placerat quam ac, facilisis augue. Phasellus et bibendum ligula. Duis luctus tincidunt neque, vitae egestas felis accumsan a. Nulla fermentum, libero tempus efficitur mollis, tortor sapien rhoncus orci, malesuada dapibus tellus nisl eu nisi.</p>
+<p>Phasellus non purus nec leo fermentum feugiat. Praesent vestibulum est a imperdiet mollis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis eu felis a lorem porta consequat. Pellentesque cursus a quam in aliquet. Praesent blandit arcu a nulla eleifend, quis efficitur nisi ullamcorper. Morbi venenatis tortor sed purus interdum, ut porttitor mauris varius.</p>
+<p>Duis rhoncus nec libero feugiat vehicula. Sed faucibus molestie magna ut tempor. Maecenas dapibus urna mollis, bibendum nisl vitae, posuere justo. Suspendisse egestas diam odio, non egestas lectus semper sed. Quisque quis massa et sem tempus ultricies ut ac justo. Donec nunc nulla, posuere sed ligula a, volutpat luctus ex. Nam orci ante, dignissim ut sagittis varius, gravida et nibh. Donec a nunc vel mauris pharetra vehicula nec eu ligula. Suspendisse vulputate purus condimentum sem bibendum eleifend quis id tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec id eros interdum, eleifend orci id, tempus lacus. Praesent felis quam, tristique in convallis non, faucibus ut erat. Sed at tellus sem. Mauris consectetur vulputate semper.</p>`
+        );
+      });
+    </script>
+  </head>
+  <body>
+
+    <div class="NavBar Desktop _flexCentered">
+      <div class="_flexCentered Menu">
+        <div >INTRODUÇÃO</div>
+        <div >MACHISMO</div>
+        <div >RACISMO</div>
+      </div>
+    </div>
+
+    <div class="NavBar Mobile">
+      
+      <div class="flexCentered _flexCentered MenuButton">
+        <svg
+        width="50"
+        height="50"
+        fill="none"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        >
+          <use href="assets/icons/custom-feather-sprite.svg#menu"/>
+        </svg>
+        <div class="_flexCentered Menu" >
+          <div >INTRODUÇÃO</div>
+          <div >MACHISMO</div>
+          <div >RACISMO</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="_flexCentered Logo">
+      <img src="assets/Images/Logo.png" alt="Report Logo">
+      <div>Report</div>
+    </div>
+
+
+
+    <div class="_flexCentered ContentSection">
+      <div class="Separator">
+        <img src="https://placekitten.com/1920/350">
+        <div class="MainTitle">ESPORTS E PRECONCEITO:<br><span class="SubTitle">COMO AS MINORIAS SÃO TRATADAS NO AMBIENTE DOS GAMES</span></div>
+      </div>
+      <div class="_flexCentered TextSection" style="background-color: yellow;">
+        <div>
+          <iframe class="YoutubeIFrame" src="https://www.youtube.com/embed/EWoPekcYeAQ"  frameborder="0" allow="clipboard-write; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="Separator">
+        <img src="https://placekitten.com/1920/350">
+        <div>MACHISMO</div>
+      </div>
+      <div class="_flexCentered TextSection" style="background-color: magenta;">
+        <div></div>
+      </div>
+      
+      <div class="Separator">
+        <img src="https://placekitten.com/1920/350">
+        <div>RACISMO</div>
+      </div>
+      <div class="_flexCentered TextSection"  style="background-color: cyan;">
+        <div></div>
+      </div>
+    </div>
+
+  </body>
+</html>
