@@ -5,15 +5,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="styles.css">
+
     <title>Report</title>
 
     <style>
+
+      @keyframes MenuOpen {
+        0% { max-width: 0px; }
+        100% { max-width: 500px; }
+      }
+
 
       :root{
         --black: #0D0D0D;
       }
       *{
         box-sizing: border-box;
+        user-select: none;
       }
       body{
         padding: 0px;
@@ -37,6 +46,10 @@
         height: 70px;
       }
 
+      .Menu{
+        color: white;
+      }
+
       .NavBar.Desktop{
         display: none;
       }
@@ -45,8 +58,6 @@
         flex-direction: row;
         flex-wrap: nowrap;
         font-weight: bold;
-      }
-      .Desktop .Menu{
         font-size: 20px;
       }
       .Desktop .Menu>div:not(:last-child){
@@ -59,27 +70,29 @@
         right: 5px;
         flex-direction: column;
         align-items: flex-end;
+        cursor: pointer;
       }
       .Mobile .MenuButton svg{
         border-radius: 5px;
         border: solid 2px white;
       }
-      .Menu{
+      .Mobile .Menu{
+        animation-fill-mode: forwards;
         position: fixed;
         top: 70px;
+        right: 0px;
         flex-direction: column;
         align-items: flex-end;
-        font-size: 20px;
         background-color: var(--black);
-        padding: 10px 5px 2px 10px;
-        /* max-height: 0px;
-        max-width: 0px; */
+        max-width: 0px;
+        overflow: hidden;
       }
-      .Mobile .MenuButton .Menu>div:not(:last-child){
+      .Mobile .Menu>div{
+        margin-right: 5px;
+        margin-left: 5px;
+      }
+      .Mobile .Menu>div:not(:last-child){
         margin-bottom: 5px;
-      }
-      .Menu{
-        color: white;
       }
 
       .Menu>div{
@@ -107,6 +120,9 @@
         width: 100%;
         min-height: calc(100vh - 70px);
         flex-direction: column;
+      }
+      .ContentSection p{
+        user-select: text !important;
       }
 
       .Separator{
@@ -136,7 +152,6 @@
         width: 100%;
         padding: 20px 10px;
       }
-
       .TextSection>div{
         width: 80%;
         max-width: 1000px;
@@ -144,6 +159,18 @@
         text-align: justify;
         padding: 25px;
       }
+      .TextSection .ItemDescriptor{
+        width: 100%;
+        padding: 0px 10%;
+        text-align: center;
+        margin: 10px 0px;
+      }
+      .TextSection h1{
+        font-size: 26px;
+        margin: 0px;
+        text-align: left;
+      }
+
 
       .YoutubeIFrame{
         width: 100%;
@@ -159,14 +186,39 @@
 
     </style>
     <script>
+      const flags = {
+        MOBILE_MENU_OPEN : false,
+        MOBILE_MENU_PROC : false,
+        GLOSSARY_OPEN    : false,
+      };
+
+      elem = {};
+
+      const scrollToSection = (_section) => window.scrollTo({
+        top: Math.max((Math.trunc(document.getElementById(_section).getBoundingClientRect().top) + window.pageYOffset) - 70, 0),
+        behavior: 'smooth'
+      });
+
+      const menuToggle = ()=>{
+        if(!flags.MOBILE_MENU_PROC){
+          flags.MOBILE_MENU_PROC = true;
+          flags.MOBILE_MENU_OPEN = !flags.MOBILE_MENU_OPEN;
+          elem.MobileMenu.style.animation = flags.MOBILE_MENU_OPEN ? 'MenuOpen 0.5s forwards' : 'MenuOpen 0.5s forwards reverse';
+          setTimeout(()=>{
+            elem.MobileMenu.style.maxWidth = flags.MOBILE_MENU_OPEN ? '500px' : '0px';
+            elem.MobileMenu.style.animation= '';
+            flags.MOBILE_MENU_PROC = false;
+          }, 505);
+        }
+      }
+
       window.addEventListener('load',()=>{
-        document.querySelectorAll('div.TextSection>div').forEach(x=>x.innerHTML += `
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod et velit vitae vulputate. Morbi volutpat, neque quis mollis varius, tortor quam fringilla magna, eget lacinia tortor nunc eget est. Sed nec nibh at mi mollis volutpat in non diam. Donec non lacus ac ipsum cursus venenatis nec eget dui. Sed bibendum sed justo quis convallis. Phasellus sollicitudin eu lectus sit amet tristique. Curabitur posuere vulputate velit, ac tempus mi laoreet in. Curabitur a tortor nec massa tincidunt luctus vitae sed quam. In auctor facilisis sollicitudin. Aliquam erat volutpat. Proin accumsan dolor nec felis ullamcorper euismod. Morbi maximus ex augue, vel varius dui imperdiet vitae. Curabitur felis nisi, convallis eu massa non, interdum finibus velit. Quisque orci eros, elementum nec risus id, auctor sollicitudin justo. Donec at dolor vitae sem cursus tempor. Nulla malesuada vel metus ac mattis.</p>
-<p>Curabitur et bibendum sem, ut volutpat nisl. Etiam eu urna eu odio molestie finibus sit amet vel neque. Donec gravida dolor eu mauris blandit auctor. Ut accumsan, nunc sit amet pellentesque mollis, sem nulla ullamcorper felis, sed varius augue libero sed orci. Suspendisse ultricies rutrum ullamcorper. Nullam accumsan elit eu tincidunt tincidunt. Aliquam feugiat porta nisl, pharetra aliquam arcu tempus a. Vivamus pretium lectus dolor, nec dignissim enim tempus id. Suspendisse id porta tellus, ac molestie quam.</p>
-<p>Suspendisse ut egestas sapien. Nam sollicitudin in ante eget maximus. Morbi condimentum risus urna, a malesuada elit suscipit ac. Maecenas eu dolor dapibus, bibendum nunc non, vulputate justo. Praesent iaculis molestie nulla eget facilisis. Praesent eget pellentesque lorem. Nullam quis erat vestibulum, scelerisque eros id, accumsan ex. Duis in ipsum orci. Maecenas congue consectetur porttitor. In ac lorem accumsan, placerat quam ac, facilisis augue. Phasellus et bibendum ligula. Duis luctus tincidunt neque, vitae egestas felis accumsan a. Nulla fermentum, libero tempus efficitur mollis, tortor sapien rhoncus orci, malesuada dapibus tellus nisl eu nisi.</p>
-<p>Phasellus non purus nec leo fermentum feugiat. Praesent vestibulum est a imperdiet mollis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis eu felis a lorem porta consequat. Pellentesque cursus a quam in aliquet. Praesent blandit arcu a nulla eleifend, quis efficitur nisi ullamcorper. Morbi venenatis tortor sed purus interdum, ut porttitor mauris varius.</p>
-<p>Duis rhoncus nec libero feugiat vehicula. Sed faucibus molestie magna ut tempor. Maecenas dapibus urna mollis, bibendum nisl vitae, posuere justo. Suspendisse egestas diam odio, non egestas lectus semper sed. Quisque quis massa et sem tempus ultricies ut ac justo. Donec nunc nulla, posuere sed ligula a, volutpat luctus ex. Nam orci ante, dignissim ut sagittis varius, gravida et nibh. Donec a nunc vel mauris pharetra vehicula nec eu ligula. Suspendisse vulputate purus condimentum sem bibendum eleifend quis id tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec id eros interdum, eleifend orci id, tempus lacus. Praesent felis quam, tristique in convallis non, faucibus ut erat. Sed at tellus sem. Mauris consectetur vulputate semper.</p>`
-        );
+        elem = {
+          MenuButton : document.getElementById('MenuButton'),
+          MobileMenu : document.getElementById('MobileMenu'),
+          // GlosButton : document.getElementById('GlosButton'),
+          // GlosMenu   : document.getElementById('GlosMenu')
+        }
       });
     </script>
   </head>
@@ -174,15 +226,15 @@
 
     <div class="NavBar Desktop _flexCentered">
       <div class="_flexCentered Menu">
-        <div >INTRODUÇÃO</div>
-        <div >MACHISMO</div>
-        <div >RACISMO</div>
+        <div onclick="scrollToSection('SeparatorIntroduction')" >INTRODUÇÃO</div>
+        <div onclick="scrollToSection('SeparatorPatriarchy')"   >MACHISMO</div>
+        <div onclick="scrollToSection('SeparatorRacism')"       >RACISMO</div>
       </div>
     </div>
 
     <div class="NavBar Mobile">
       
-      <div class="flexCentered _flexCentered MenuButton">
+      <div class="flexCentered _flexCentered MenuButton" id="MenuButton" onclick="menuToggle()">
         <svg
         width="50"
         height="50"
@@ -194,11 +246,11 @@
         >
           <use href="assets/icons/custom-feather-sprite.svg#menu"/>
         </svg>
-        <div class="_flexCentered Menu" >
-          <div >INTRODUÇÃO</div>
-          <div >MACHISMO</div>
-          <div >RACISMO</div>
-        </div>
+      </div>
+      <div class="_flexCentered Menu" id="MobileMenu">
+        <div onclick="scrollToSection('SeparatorIntroduction')" >INTRODUÇÃO</div>
+        <div onclick="scrollToSection('SeparatorPatriarchy')"   >MACHISMO</div>
+        <div onclick="scrollToSection('SeparatorRacism')"       >RACISMO</div>
       </div>
     </div>
 
@@ -212,28 +264,80 @@
     <div class="_flexCentered ContentSection">
       <div class="Separator">
         <img src="https://placekitten.com/1920/350">
-        <div class="MainTitle">ESPORTS E PRECONCEITO:<br><span class="SubTitle">COMO AS MINORIAS SÃO TRATADAS NO AMBIENTE DOS GAMES</span></div>
+        <div class="MainTitle" id="SeparatorIntroduction">ESPORTS E PRECONCEITO:<br><span class="SubTitle">COMO AS MINORIAS SÃO TRATADAS NO AMBIENTE DOS GAMES</span></div>
       </div>
-      <div class="_flexCentered TextSection" style="background-color: yellow;">
+      <div class="_flexCentered TextSection" style="background-color: #ca4e4e">
         <div>
           <iframe class="YoutubeIFrame" src="https://www.youtube.com/embed/EWoPekcYeAQ"  frameborder="0" allow="clipboard-write; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+
+          <div class="ItemDescriptor">No vídeo, falamos sobre minorias,conceito importante para toda a reportagem. Mas, o que é isso?</div>
+          
+          <h1>Minorias</h1>
+          <p>
+          Quando se fala em minoria, o termo pode confundir. Minorias não dizem respeito a uma coletividade com menor quantidade de pessoas, mas fazem referência a grupos que são marginalizados dentro de uma sociedade devido aos seus aspectos econômicos, culturais, religiosos, físicos ou sociais.
+          Tais grupos estão em desvantagem ou dependência social dos grupos dominantes e não usufruem de direitos igualitários.
+          Alguns exemplos de grupos minoritários, são: LGBT+’s, mulheres, negros, idosos e imigrantes.
+          Agora que você já está sabendo como nossa reportagem vai funcionar, vamos começar contextualizando sobre a história do esports no Brasil e no mundo e quais são as características do gamer atualmente em nosso país, com dados da Pesquisa Game Brasil de 2021.
+          Primeiramente, é necessário entender o significado do termo que guia esta reportagem. esport é a abreviação do termo em inglês eletronic sports, que se refere a jogos eletrônicos no âmbito profissional, com caráter competitivo e organizado.
+          </p>
+
+          <h1>História</h1>
+          <p>
+          A história do esport iniciou-se em 1972, na Universidade Stanford, nos Estados Unidos, com a 1º competição de esporte eletrônico que se tem notícia, do jogo Space War Intergalactic. O prêmio do campeonato foi uma assinatura da revista Rolling Stone como prêmio.
+          8 anos depois, em 1980, aconteceu a 1º Competição de esporte eletrônico em larga escala, também nos Estados Unidos. O jogo foi o famoso Atari - Space Invaders Championship e a disputa contou com 10 mil participantes. A partir daí o cenário competitivo de esportes eletrônicos foi crescendo aos poucos, com grande expressividade após o ano 2000. Nesse ano, foram realizados 10 torneios de esports no mundo, já em 2010, este número subiu para 160 torneios.
+          O grande motivo foi o crescimento da internet, que proporcionou menos limitações físicas e geográficas para as competições, além de ter muito mais gente jogando.
+          Já a partir de 2010 o streaming popularizou-se pela plataforma Twitch, e além de muitas pessoas começarem a jogar, muitos mais se tornaram espectadores de jogos eletrônicos e dos campeonatos.
+          </p>
+
+          <h1>A indústria de games é a mais lucrativa do ramo de entretenimento</h1>
+          <p>
+          Hoje em dia, é muito claro a evolução dos esports. Para se ter noção, em 2018 e 2019 foi oferecido, aproximadamente, US$ 393,5 milhões de dólares em premiações de campeonatos de esportes eletrônicos, o qual superou, em apenas 2 anos, todas as premiações oferecidas na década anterior.
+          Seja no smartphone, console, tablet ou PC, há 2,3 bilhões de gamers pelo mundo. Eles movimentam uma indústria que também é bilionária. De acordo com um relatório da NewZoo, empresa de análise de games e esports (sigla de esportes eletrônicos), a expectativa é que este novo mercado global alcance US$ 180 bilhões de receita em 2021.
+          Dentro do esports, o segmento que mais cresce é o de MMO (“massively multiplayer online”, ou jogos entre equipes). São exemplos o Fortnite, League of Legends, CS:Go, entre outros. Atualmente, o MMO corresponde a cerca de um terço desse mercado.
+          </p>
+
+          <h1>No Brasil</h1>
+          <p>
+          Atualmente, o Brasil pode se considerar um país de gamers. Desde 2004, o setor de esportes eletrônicos se profissionalizou, com criação da Associação Brasileira de Games (AbraGames) e a Associação Comercial, Industrial e Cultural dos Jogos Eletrônicos no Brasil (Acigames).
+          Somos o 1º em consumo de jogos da América latina e o 4º no mundo, com quase 100 milhões de pessoas jogando em todo o país.
+          Em 2016, 26% dos gamers brasileiros já haviam assistido campeonatos profissionais. Já em 2017, essa porcentagem subiu para 36,4%.
+          Já o faturamento total dos jogos digitais no Brasil é previsto para 1,75 bilhão de dólares para 2022.
+          De acordo com a Pesquisa Game Brasil de 2021, que entrevistou 12.498 em todo o Brasil, temos:
+          </p>
+
+          <h1>Perfil dos gamers brasileiros</h1>
+          <p>
+          A Pesquisa Game Brasil de 2021, coletou dados de mais de 12 mil entrevistados. Com as respostas, foi possível obter informações importantes sobre o gamer brasileiro. São elas:
+          </p>
         </div>
       </div>
 
-      <div class="Separator">
+      <div class="Separator" id="SeparatorPatriarchy">
         <img src="https://placekitten.com/1920/350">
         <div>MACHISMO</div>
       </div>
-      <div class="_flexCentered TextSection" style="background-color: magenta;">
-        <div></div>
+      <div class="_flexCentered TextSection" style="background-color: #a956c7;">
+        <div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod et velit vitae vulputate. Morbi volutpat, neque quis mollis varius, tortor quam fringilla magna, eget lacinia tortor nunc eget est. Sed nec nibh at mi mollis volutpat in non diam. Donec non lacus ac ipsum cursus venenatis nec eget dui. Sed bibendum sed justo quis convallis. Phasellus sollicitudin eu lectus sit amet tristique. Curabitur posuere vulputate velit, ac tempus mi laoreet in. Curabitur a tortor nec massa tincidunt luctus vitae sed quam. In auctor facilisis sollicitudin. Aliquam erat volutpat. Proin accumsan dolor nec felis ullamcorper euismod. Morbi maximus ex augue, vel varius dui imperdiet vitae. Curabitur felis nisi, convallis eu massa non, interdum finibus velit. Quisque orci eros, elementum nec risus id, auctor sollicitudin justo. Donec at dolor vitae sem cursus tempor. Nulla malesuada vel metus ac mattis.</p>
+          <p>Curabitur et bibendum sem, ut volutpat nisl. Etiam eu urna eu odio molestie finibus sit amet vel neque. Donec gravida dolor eu mauris blandit auctor. Ut accumsan, nunc sit amet pellentesque mollis, sem nulla ullamcorper felis, sed varius augue libero sed orci. Suspendisse ultricies rutrum ullamcorper. Nullam accumsan elit eu tincidunt tincidunt. Aliquam feugiat porta nisl, pharetra aliquam arcu tempus a. Vivamus pretium lectus dolor, nec dignissim enim tempus id. Suspendisse id porta tellus, ac molestie quam.</p>
+          <p>Suspendisse ut egestas sapien. Nam sollicitudin in ante eget maximus. Morbi condimentum risus urna, a malesuada elit suscipit ac. Maecenas eu dolor dapibus, bibendum nunc non, vulputate justo. Praesent iaculis molestie nulla eget facilisis. Praesent eget pellentesque lorem. Nullam quis erat vestibulum, scelerisque eros id, accumsan ex. Duis in ipsum orci. Maecenas congue consectetur porttitor. In ac lorem accumsan, placerat quam ac, facilisis augue. Phasellus et bibendum ligula. Duis luctus tincidunt neque, vitae egestas felis accumsan a. Nulla fermentum, libero tempus efficitur mollis, tortor sapien rhoncus orci, malesuada dapibus tellus nisl eu nisi.</p>
+          <p>Phasellus non purus nec leo fermentum feugiat. Praesent vestibulum est a imperdiet mollis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis eu felis a lorem porta consequat. Pellentesque cursus a quam in aliquet. Praesent blandit arcu a nulla eleifend, quis efficitur nisi ullamcorper. Morbi venenatis tortor sed purus interdum, ut porttitor mauris varius.</p>
+          <p>Duis rhoncus nec libero feugiat vehicula. Sed faucibus molestie magna ut tempor. Maecenas dapibus urna mollis, bibendum nisl vitae, posuere justo. Suspendisse egestas diam odio, non egestas lectus semper sed. Quisque quis massa et sem tempus ultricies ut ac justo. Donec nunc nulla, posuere sed ligula a, volutpat luctus ex. Nam orci ante, dignissim ut sagittis varius, gravida et nibh. Donec a nunc vel mauris pharetra vehicula nec eu ligula. Suspendisse vulputate purus condimentum sem bibendum eleifend quis id tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec id eros interdum, eleifend orci id, tempus lacus. Praesent felis quam, tristique in convallis non, faucibus ut erat. Sed at tellus sem. Mauris consectetur vulputate semper.</p>`
+        </div>
       </div>
       
-      <div class="Separator">
+      <div class="Separator" id="SeparatorRacism">
         <img src="https://placekitten.com/1920/350">
         <div>RACISMO</div>
       </div>
-      <div class="_flexCentered TextSection"  style="background-color: cyan;">
-        <div></div>
+      <div class="_flexCentered TextSection"  style="background-color: rgb(164, 106, 80);">
+        <div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod et velit vitae vulputate. Morbi volutpat, neque quis mollis varius, tortor quam fringilla magna, eget lacinia tortor nunc eget est. Sed nec nibh at mi mollis volutpat in non diam. Donec non lacus ac ipsum cursus venenatis nec eget dui. Sed bibendum sed justo quis convallis. Phasellus sollicitudin eu lectus sit amet tristique. Curabitur posuere vulputate velit, ac tempus mi laoreet in. Curabitur a tortor nec massa tincidunt luctus vitae sed quam. In auctor facilisis sollicitudin. Aliquam erat volutpat. Proin accumsan dolor nec felis ullamcorper euismod. Morbi maximus ex augue, vel varius dui imperdiet vitae. Curabitur felis nisi, convallis eu massa non, interdum finibus velit. Quisque orci eros, elementum nec risus id, auctor sollicitudin justo. Donec at dolor vitae sem cursus tempor. Nulla malesuada vel metus ac mattis.</p>
+          <p>Curabitur et bibendum sem, ut volutpat nisl. Etiam eu urna eu odio molestie finibus sit amet vel neque. Donec gravida dolor eu mauris blandit auctor. Ut accumsan, nunc sit amet pellentesque mollis, sem nulla ullamcorper felis, sed varius augue libero sed orci. Suspendisse ultricies rutrum ullamcorper. Nullam accumsan elit eu tincidunt tincidunt. Aliquam feugiat porta nisl, pharetra aliquam arcu tempus a. Vivamus pretium lectus dolor, nec dignissim enim tempus id. Suspendisse id porta tellus, ac molestie quam.</p>
+          <p>Suspendisse ut egestas sapien. Nam sollicitudin in ante eget maximus. Morbi condimentum risus urna, a malesuada elit suscipit ac. Maecenas eu dolor dapibus, bibendum nunc non, vulputate justo. Praesent iaculis molestie nulla eget facilisis. Praesent eget pellentesque lorem. Nullam quis erat vestibulum, scelerisque eros id, accumsan ex. Duis in ipsum orci. Maecenas congue consectetur porttitor. In ac lorem accumsan, placerat quam ac, facilisis augue. Phasellus et bibendum ligula. Duis luctus tincidunt neque, vitae egestas felis accumsan a. Nulla fermentum, libero tempus efficitur mollis, tortor sapien rhoncus orci, malesuada dapibus tellus nisl eu nisi.</p>
+          <p>Phasellus non purus nec leo fermentum feugiat. Praesent vestibulum est a imperdiet mollis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis eu felis a lorem porta consequat. Pellentesque cursus a quam in aliquet. Praesent blandit arcu a nulla eleifend, quis efficitur nisi ullamcorper. Morbi venenatis tortor sed purus interdum, ut porttitor mauris varius.</p>
+          <p>Duis rhoncus nec libero feugiat vehicula. Sed faucibus molestie magna ut tempor. Maecenas dapibus urna mollis, bibendum nisl vitae, posuere justo. Suspendisse egestas diam odio, non egestas lectus semper sed. Quisque quis massa et sem tempus ultricies ut ac justo. Donec nunc nulla, posuere sed ligula a, volutpat luctus ex. Nam orci ante, dignissim ut sagittis varius, gravida et nibh. Donec a nunc vel mauris pharetra vehicula nec eu ligula. Suspendisse vulputate purus condimentum sem bibendum eleifend quis id tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec id eros interdum, eleifend orci id, tempus lacus. Praesent felis quam, tristique in convallis non, faucibus ut erat. Sed at tellus sem. Mauris consectetur vulputate semper.</p>`
+        </div>
       </div>
     </div>
 
