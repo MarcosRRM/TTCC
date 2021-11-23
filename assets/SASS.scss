@@ -1,7 +1,70 @@
-.Teste{
-  margin-top: ;
+$mobileMode: 600px;
 
-  & massa{
-    margin-bottom: loko;
+.YoutubeIFrame{
+  margin-top: 50px;
+  width: 100%;
+  height: 80vh;
+}
+
+
+.TextSection{
+  width: 100%;
+  flex-direction: column;
+
+  .TextBlock{
+    width: 80%;
+    max-width: 1000px;
+    text-align: justify;
+    color: white;
+    font-size: clamp(15px, 1.6vw, 17px)
   }
+
+  .ItemDescriptor{
+    width: 100%;
+    padding: 0px 10%;
+    text-align: center;
+    margin: 10px 0px;
+  }
+
+  h1{
+    font-size: 35px;
+    margin: 0px;
+    text-align: center;
+    font-weight: 300;
+  }
+}
+
+.Separator{
+  font-family: 'Roboto Slab', serif;
+  position: relative;
+  width: 100%;
+  padding: 0px;
+  
+  img{
+      width: 100%;
+  }
+  
+  div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:white;
+    font-size: 60px;
+    text-align: center;
+  }
+
+  span.SubTitle{
+    font-size: 30px;
+    white-space: nowrap;
+  }
+}
+
+._WholeLineItem{
+  width: 100vw;
+}
+
+.WholePageImage{
+  width: 100vw;
+  height: 100vh;
 }
