@@ -10,7 +10,7 @@ $mobileMode: 600px;
 .TextSection{
   width: 100%;
   flex-direction: column;
-  font-size: clamp(15px, 1.6vw, 1px);
+  font-size: clamp(15px, 1.6vw, 18px);
 
   .TextBlock{
     width: 80%;
@@ -31,7 +31,7 @@ $mobileMode: 600px;
   }
 
   h1{
-    font-size: 35px;
+    font-size: clamp(25px, 2.4vw, 40px);
     margin: 0px;
     text-align: center;
     font-weight: 300;
