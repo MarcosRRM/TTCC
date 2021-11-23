@@ -3,6 +3,11 @@
   width: 100%;
   height: 80vh;
 }
+@media (max-width: 600px) {
+  .YoutubeIFrame {
+    height: 50vw;
+  }
+}
 
 .TextSection {
   width: 100%;
