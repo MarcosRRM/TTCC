@@ -7,13 +7,18 @@
 .TextSection {
   width: 100%;
   flex-direction: column;
+  font-size: clamp(15px, 1.6vw, 1px);
 }
 .TextSection .TextBlock {
   width: 80%;
   max-width: 1000px;
   text-align: justify;
   color: white;
-  font-size: clamp(15px, 1.6vw, 17px);
+}
+@media (max-width: 600px) {
+  .TextSection .TextBlock {
+    width: 90%;
+  }
 }
 .TextSection .ItemDescriptor {
   width: 100%;

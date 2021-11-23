@@ -10,13 +10,17 @@ $mobileMode: 600px;
 .TextSection{
   width: 100%;
   flex-direction: column;
+  font-size: clamp(15px, 1.6vw, 1px);
 
   .TextBlock{
     width: 80%;
     max-width: 1000px;
     text-align: justify;
     color: white;
-    font-size: clamp(15px, 1.6vw, 17px)
+
+    @media (max-width: $mobileMode) {
+      width: 90%;
+    }
   }
 
   .ItemDescriptor{
