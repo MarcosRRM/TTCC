@@ -65,10 +65,18 @@
   text-align: justify;
   color: white;
 }
-@media (max-width: 600px) {
+@media (min-width: 600px) {
   .TextSection .TextBlock {
     width: 90%;
   }
+}
+.TextSection .TextBlock .Text {
+  user-select: text !important;
+}
+.TextSection .TextBlock .Text .ImgRight {
+  float: right;
+  max-width: 50vw;
+  margin-left: 10px;
 }
 .TextSection .ItemDescriptor {
   width: 100%;
