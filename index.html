@@ -33,12 +33,6 @@
         font-family: 'Source Sans Pro', sans-serif;
       }
 
-      ._flexCentered{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
       .NavBar {
         position: fixed; top: 0; left: 0; z-index: 1000;
         background-color: var(--black);
@@ -141,6 +135,12 @@
 
       elem = {};
 
+      const closeTriggerWarning = () => {
+        document.getElementById('TriggerWarningScreen').style.display='none';
+        window.scrollTo(0, 0);
+        window.localStorage.setItem('TriggerWarningAccept', '1');
+      }
+
       const scrollToSection = (_section) => window.scrollTo({
         top: Math.max((Math.trunc(document.getElementById(_section).getBoundingClientRect().top) + window.pageYOffset) - 70, 0),
         behavior: 'smooth'
@@ -160,6 +160,7 @@
       }
 
       window.addEventListener('load',()=>{
+        if (window.localStorage.getItem('TriggerWarningAccept')) closeTriggerWarning();
         elem = {
           MenuButton : document.getElementById('MenuButton'),
           MobileMenu : document.getElementById('MobileMenu'),
@@ -170,6 +171,28 @@
     </script>
   </head>
   <body>
+
+    <div class="_flexCentered TriggerWarning" id="TriggerWarningScreen">
+      <svg
+      width="100"
+      height="100"
+      fill="none"
+      stroke="yellow"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      >
+        <use href="assets/icons/custom-feather-sprite.svg#alert-triangle"/>
+      </svg>
+      <h1>
+        O conteúdo desta reportagem pode ser perturbador para alguns públicos.
+      </h1>
+      <p>Todas as falas foram transcritas sem alterações, portanto contêm palavrões, relatos de violência verbal e casos reais de preconceitos, como: racismo, machismo, assédio e lgbtfobia.</p>
+      <div class="ButtonContainer _flexCentered">
+        <div onclick="closeTriggerWarning()" >Continuar</div>
+        <div onclick="window.location.href = 'https://www.google.com'">Sair deste site</div>
+      </div>
+    </div>
 
     <div class="NavBar Desktop _flexCentered">
       <div class="_flexCentered Menu">

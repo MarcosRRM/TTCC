@@ -1,3 +1,48 @@
+._flexCentered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.TriggerWarning {
+  z-index: 999999;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0D0D0D;
+  color: white;
+  flex-direction: column;
+  padding: 5vh 5vw;
+}
+.TriggerWarning h1 {
+  margin: 10px 0px;
+  font-weight: 300;
+  font-size: clamp(40px, 2.6vw, 55px);
+}
+.TriggerWarning p {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 100;
+  margin: 0px;
+}
+.TriggerWarning .ButtonContainer {
+  margin-top: 20px;
+}
+.TriggerWarning .ButtonContainer div {
+  font-size: 20px;
+  border-radius: 5px;
+  border: 1px solid white;
+  padding: 10px;
+  cursor: pointer;
+}
+@media (min-width: 600px) {
+  .TriggerWarning .ButtonContainer div:not(:last-child) {
+    margin-right: 20px;
+  }
+}
+
 .YoutubeIFrame {
   width: 100%;
   height: 80vh;
