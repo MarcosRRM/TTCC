@@ -49,7 +49,7 @@
 }
 @media (max-width: 600px) {
   .YoutubeIFrame {
-    height: 350px;
+    height: 15vh;
   }
 }
 
