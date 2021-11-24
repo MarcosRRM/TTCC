@@ -46,6 +46,7 @@
 .YoutubeIFrame {
   width: 100%;
   height: 80vh;
+  margin-bottom: 20px;
 }
 @media (max-width: 600px) {
   .YoutubeIFrame {
