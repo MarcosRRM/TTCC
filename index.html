@@ -11,11 +11,6 @@
 
     <style>
 
-      @keyframes MenuOpen {
-        0% { max-width: 0px; }
-        100% { max-width: 500px; }
-      }
-
 
       :root{
         --black: #0D0D0D;
@@ -56,37 +51,6 @@
       }
       .Desktop .Menu>div:not(:last-child){
         margin-right: 20px;
-      }
-
-      .Mobile .MenuButton{
-        position: fixed;
-        top: 7px;
-        right: 5px;
-        flex-direction: column;
-        align-items: flex-end;
-        cursor: pointer;
-      }
-      .Mobile .MenuButton svg{
-        border-radius: 5px;
-        border: solid 2px white;
-      }
-      .Mobile .Menu{
-        animation-fill-mode: forwards;
-        position: fixed;
-        top: 70px;
-        right: 0px;
-        flex-direction: column;
-        align-items: flex-end;
-        background-color: var(--black);
-        max-width: 0px;
-        overflow: hidden;
-      }
-      .Mobile .Menu>div{
-        margin-right: 5px;
-        margin-left: 5px;
-      }
-      .Mobile .Menu>div:not(:last-child){
-        margin-bottom: 5px;
       }
 
       .Menu>div{
@@ -131,6 +95,7 @@
         MOBILE_MENU_OPEN : false,
         MOBILE_MENU_PROC : false,
         GLOSSARY_OPEN    : false,
+        GLOSSARY_PROC    : false
       };
 
       elem = {};
@@ -159,15 +124,31 @@
         }
       }
 
+      const glossaryToggle = ()=>{
+        if(!flags.GLOSSARY_PROC){
+          flags.GLOSSARY_PROC = true;
+          flags.GLOSSARY_OPEN = !flags.GLOSSARY_OPEN;
+          elem.GlossContent.style.animation = flags.GLOSSARY_OPEN ? 'GlossaryOpen 0.5s forwards' : 'GlossaryOpen 0.5s forwards reverse';
+          setTimeout(()=>{
+            elem.GlossContent.style.maxWidth  = flags.GLOSSARY_OPEN ? '320px' : '0px';
+            elem.GlossContent.style.maxHeight = flags.GLOSSARY_OPEN ? '600px' : '0px';
+            elem.GlossContent.style.overflow  = flags.GLOSSARY_OPEN ? 'auto'  : 'hidden';
+            elem.GlossContent.style.padding   = flags.GLOSSARY_OPEN ? '10px'  : '0px';
+            elem.GlossContent.style.animation = '';
+            flags.GLOSSARY_PROC = false;
+          }, 505);
+        }
+      }
+
       window.addEventListener('load',()=>{
         if (window.localStorage.getItem('TriggerWarningAccept')) closeTriggerWarning();
         document.querySelectorAll("a").forEach(a=>a.target="_blank");
 
         elem = {
-          MenuButton : document.getElementById('MenuButton'),
-          MobileMenu : document.getElementById('MobileMenu'),
-          // GlosButton : document.getElementById('GlosButton'),
-          // GlosMenu   : document.getElementById('GlosMenu')
+          MenuButton   : document.getElementById('MenuButton'),
+          MobileMenu   : document.getElementById('MobileMenu'),
+          GlossTitle   : document.getElementById('GlossTitle'),
+          GlossContent : document.getElementById('GlossContent')
         }
       });
     </script>
@@ -193,6 +174,24 @@
       <div class="ButtonContainer _flexCentered">
         <div onclick="closeTriggerWarning()" >Continuar</div>
         <div onclick="window.location.href = 'https://www.google.com'">Sair deste site</div>
+      </div>
+    </div>
+
+    <div class="Glossary">
+      <div class="Title" id="GlossTitle" onclick="glossaryToggle()">Glossário</div>
+      <div class="_flexCentered Content" id="GlossContent">
+        <div class="Word">TESTE</div>
+        <div class="Description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum leo, nec tempor leo. Etiam consectetur odio at mi cursus pretium. In fermentum, leo non dignissim aliquet, diam ipsum aliquam orci, id convallis tellus nisi consectetur nibh.</div>
+        <div class="Word">TESTE</div>
+        <div class="Description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum leo, nec tempor leo. Etiam consectetur odio at mi cursus pretium. In fermentum, leo non dignissim aliquet, diam ipsum aliquam orci, id convallis tellus nisi consectetur nibh.</div>
+        <div class="Word">TESTE</div>
+        <div class="Description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum leo, nec tempor leo. Etiam consectetur odio at mi cursus pretium. In fermentum, leo non dignissim aliquet, diam ipsum aliquam orci, id convallis tellus nisi consectetur nibh.</div>
+        <div class="Word">TESTE</div>
+        <div class="Description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum leo, nec tempor leo. Etiam consectetur odio at mi cursus pretium. In fermentum, leo non dignissim aliquet, diam ipsum aliquam orci, id convallis tellus nisi consectetur nibh.</div>
+        <div class="Word">TESTE</div>
+        <div class="Description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum leo, nec tempor leo. Etiam consectetur odio at mi cursus pretium. In fermentum, leo non dignissim aliquet, diam ipsum aliquam orci, id convallis tellus nisi consectetur nibh.</div>
+        <div class="Word">TESTE</div>
+        <div class="Description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum leo, nec tempor leo. Etiam consectetur odio at mi cursus pretium. In fermentum, leo non dignissim aliquet, diam ipsum aliquam orci, id convallis tellus nisi consectetur nibh.</div>
       </div>
     </div>
 
