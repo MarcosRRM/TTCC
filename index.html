@@ -124,22 +124,6 @@
         }
       }
 
-      const glossaryToggle = ()=>{
-        if(!flags.GLOSSARY_PROC){
-          flags.GLOSSARY_PROC = true;
-          flags.GLOSSARY_OPEN = !flags.GLOSSARY_OPEN;
-          elem.GlossContent.style.animation = flags.GLOSSARY_OPEN ? 'GlossaryOpen 0.5s forwards' : 'GlossaryOpen 0.5s forwards reverse';
-          setTimeout(()=>{
-            elem.GlossContent.style.maxWidth  = flags.GLOSSARY_OPEN ? '320px' : '0px';
-            elem.GlossContent.style.maxHeight = flags.GLOSSARY_OPEN ? '600px' : '0px';
-            elem.GlossContent.style.overflow  = flags.GLOSSARY_OPEN ? 'auto'  : 'hidden';
-            elem.GlossContent.style.padding   = flags.GLOSSARY_OPEN ? '10px'  : '0px';
-            elem.GlossContent.style.animation = '';
-            flags.GLOSSARY_PROC = false;
-          }, 505);
-        }
-      }
-
       window.addEventListener('load',()=>{
         if (window.localStorage.getItem('TriggerWarningAccept')) closeTriggerWarning();
         document.querySelectorAll("a").forEach(a=>a.target="_blank");
@@ -150,7 +134,25 @@
           GlossTitle   : document.getElementById('GlossTitle'),
           GlossContent : document.getElementById('GlossContent')
         }
+        
+        elem.GlossTitle.addEventListener('click',()=>{
+          if(!flags.GLOSSARY_PROC){
+            flags.GLOSSARY_PROC = true;
+            flags.GLOSSARY_OPEN = !flags.GLOSSARY_OPEN;
+            elem.GlossContent.style.animation = flags.GLOSSARY_OPEN ? 'GlossaryOpen 0.5s forwards' : 'GlossaryOpen 0.5s forwards reverse';
+            setTimeout(()=>{
+              elem.GlossContent.style.maxWidth  = flags.GLOSSARY_OPEN ? '320px' : '0px';
+              elem.GlossContent.style.maxHeight = flags.GLOSSARY_OPEN ? '600px' : '0px';
+              elem.GlossContent.style.overflow  = flags.GLOSSARY_OPEN ? 'auto'  : 'hidden';
+              elem.GlossContent.style.padding   = flags.GLOSSARY_OPEN ? '175px 10px 10px'  : '0px';
+              elem.GlossContent.style.animation = '';
+              flags.GLOSSARY_PROC = false;
+            }, 505);
+          }
+        });
       });
+
+
     </script>
   </head>
   <body>
@@ -178,20 +180,22 @@
     </div>
 
     <div class="Glossary">
-      <div class="Title" id="GlossTitle" onclick="glossaryToggle()">Glossário</div>
+      <div class="Title" id="GlossTitle" >Glossário</div>
       <div class="_flexCentered Content" id="GlossContent">
-        <div class="Word">TESTE</div>
-        <div class="Description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum leo, nec tempor leo. Etiam consectetur odio at mi cursus pretium. In fermentum, leo non dignissim aliquet, diam ipsum aliquam orci, id convallis tellus nisi consectetur nibh.</div>
-        <div class="Word">TESTE</div>
-        <div class="Description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum leo, nec tempor leo. Etiam consectetur odio at mi cursus pretium. In fermentum, leo non dignissim aliquet, diam ipsum aliquam orci, id convallis tellus nisi consectetur nibh.</div>
-        <div class="Word">TESTE</div>
-        <div class="Description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum leo, nec tempor leo. Etiam consectetur odio at mi cursus pretium. In fermentum, leo non dignissim aliquet, diam ipsum aliquam orci, id convallis tellus nisi consectetur nibh.</div>
-        <div class="Word">TESTE</div>
-        <div class="Description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum leo, nec tempor leo. Etiam consectetur odio at mi cursus pretium. In fermentum, leo non dignissim aliquet, diam ipsum aliquam orci, id convallis tellus nisi consectetur nibh.</div>
-        <div class="Word">TESTE</div>
-        <div class="Description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum leo, nec tempor leo. Etiam consectetur odio at mi cursus pretium. In fermentum, leo non dignissim aliquet, diam ipsum aliquam orci, id convallis tellus nisi consectetur nibh.</div>
-        <div class="Word">TESTE</div>
-        <div class="Description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum leo, nec tempor leo. Etiam consectetur odio at mi cursus pretium. In fermentum, leo non dignissim aliquet, diam ipsum aliquam orci, id convallis tellus nisi consectetur nibh.</div>
+        <div class="Word">League of Legends</div>
+        <div class="Description">Também conhecido como LOL é um jogo do tipo MOBA 5x5 que mistura elementos de ação, aventura e RPG, cada partida tem duração média de 40 minutos.</div>
+        <div class="Word">Valorant</div>
+        <div class="Description">Um jogo estilo FPS (First-Person Shooter), 5x5 em primeiro plano, onde cada personagem tem habilidades táticas além da mecânica de tiro.</div>
+        <div class="Word">Riot Games</div>
+        <div class="Description">Desenvolvedora por trás de jogos como League of Legends (2009), Valorant (2020), Legends of Runeterra (2020), Teamfight Tactics (2019) e Wild Rift (2020).</div>
+        <div class="Word">Casters</div>
+        <div class="Description">Narradores de E-sports, transmitem, analisam, narram e dão vozes e espírito as competições que acontecem.</div>
+        <div class="Word">Streaming</div>
+        <div class="Description">Transmissão de conteúdos em formato digital, como por exemplo o Youtube, Netflix, Spotify, etc.</div>
+        <div class="Word">FPS</div>
+        <div class="Description">Sigla para First Person Shooter. Estilo de jogo onde se vê em primeira pessoa.</div>
+        <div class="Word">Gameplay</div>
+        <div class="Description">Pode ser traduzido como jogabilidade, mas é costumeiramente usado para se referir a um vídeo de uma pessoa jogando, seja gravado e editado, ou em forma de live.</div>
       </div>
     </div>
 
@@ -234,7 +238,7 @@
 
     <div class="_flexCentered ContentSection">
       <div class="Separator">
-        <img src="/assets/images/TopBanner.gif"asd style="height: calc(100vh - 70px); object-fit: cover;">
+        <img src="/assets/images/TopBanner.gif" style="height: calc(100vh - 70px); object-fit: cover;">
         <div class="MainTitle" id="SeparatorIntroduction">
           ESPORTS E PRECONCEITO:
           <br>
@@ -256,10 +260,10 @@
       </div>
       <div class="_flexCentered TextSection" style="background-color: #ac3c3c">
         
-        <iframe class="YoutubeIFrame" src="https://www.youtube.com/embed/9kw0gcg3KXk"  frameborder="0" allow="clipboard-write; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <iframe class="YoutubeIFrame" src="https://www.youtube.com/embed/wjcz-T82984"  frameborder="0" allow="clipboard-write; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         
         <div class="TextBlock">
-          <h1>História EM JOGOS ONLINE</h1>
+          <h1>História</h1>
           
           <div class="Text">
             <img class="ImgRight" src="assets/images/OldLanParty.jpg" alt="Competição Antiga">
@@ -269,14 +273,14 @@
               Já a partir de 2010 o streaming popularizou-se pela plataforma Twitch, e além de muitas pessoas começarem a jogar, muitos mais se tornaram espectadores de jogos eletrônicos e dos campeonatos.
           </div>
 
-          <h1>A indústria de games é a mais lucrativa<br>do ramo de entretenimento</h1>
+          <h2>A indústria de games é a mais lucrativa<br>do ramo de entretenimento</h2>
           <div class="Text">
             Hoje em dia, é muito claro a evolução dos esports. Para se ter noção, em 2018 e 2019 foi oferecido, aproximadamente, US$ 393,5 milhões de dólares em premiações de campeonatos de esportes eletrônicos, o qual superou, em apenas 2 anos, todas as premiações oferecidas na década anterior.
             Seja no smartphone, console, tablet ou PC, há 2,3 bilhões de gamers pelo mundo. Eles movimentam uma indústria que também é bilionária. De acordo com um relatório da NewZoo, empresa de análise de games e esports (sigla de esportes eletrônicos), a expectativa é que este novo mercado global alcance US$ 180 bilhões de receita em 2021.
             Dentro do esports, o segmento que mais cresce é o de MMO (“massively multiplayer online”, ou jogos entre equipes). São exemplos o Fortnite, League of Legends, CS:GO, entre outros. Atualmente, o MMO corresponde a cerca de um terço desse mercado.
           </div>
 
-          <h1>No Brasil</h1>
+          <h2>No Brasil</h2>
           <div class="Text">
             Atualmente, o Brasil pode se considerar um país de gamers. Desde 2004, o setor de esportes eletrônicos se profissionalizou, com criação da Associação Brasileira de Games (AbraGames) e a Associação Comercial, Industrial e Cultural dos Jogos Eletrônicos no Brasil (Acigames).
             Somos o 1º em consumo de jogos da América latina e o 4º no mundo, com quase 100 milhões de pessoas jogando em todo o país.
@@ -285,7 +289,7 @@
             De acordo com a Pesquisa Game Brasil de 2021, que entrevistou 12.498 em todo o Brasil, temos:
           </div>
 
-          <h1>Perfil dos gamers brasileiros</h1>
+          <h2>Perfil dos gamers brasileiros</h2>
           <div class="Text">
             A Pesquisa Game Brasil de 2021, coletou dados de mais de 12 mil entrevistados. Com as respostas, foi possível obter informações importantes sobre o gamer brasileiro. São elas:
           </div>
@@ -293,8 +297,6 @@
           <div class="CenteredImg"><img src="/assets/images/infografico.png"></div>
 
           <div class="CenteredImg" style="padding: 15px; border-radius: 50px; background-color: #d68282;"><img src="/assets/images/Ages.png"></div>
-          
-          <div class="CenteredImg"><img src="/assets/vectors/minorias.svg" style="width: 100%; max-width: 450px; margin: 0px auto; background-size: cover;"></div>
         </div>
       </div>
 
@@ -302,9 +304,12 @@
         <img src="/assets/images/PatriarchySeparator.png">
         <div>MACHISMO EM JOGOS ONLINE</div>
       </div>
-      <div class="_flexCentered TextSection" style="background-color: #ff7ccc;">
-        <div class="TextBlock" style="color: black !important;">
-          <div class="Text">Ofensas são facilmente distribuídas quando não se tem um rosto a quem desferir, ainda mais em se tratando de preconceitos que já estão enraizados há muito tempo na sociedade, como o machismo que afeta tanto homens e mulheres, desde a base familiar até suas relações interpessoais.</div>
+      <div class="_flexCentered TextSection" style="background-color: #aa5d8e;">
+        <div class="TextBlock">
+          <div class="Text">
+            <div class="ImgRight"><img src="/assets/images/minorias.png" style="background-size: cover;"></div>
+            Ofensas são facilmente distribuídas quando não se tem um rosto a quem desferir, ainda mais em se tratando de preconceitos que já estão enraizados há muito tempo na sociedade, como o machismo que afeta tanto homens e mulheres, desde a base familiar até suas relações interpessoais.
+          </div>
           <div class="Text">Isso é levado para outras vivências e outras histórias, prejudicando o progresso de minorias que, por sua vez, não são quantitativas e sim oprimidas por um sistema criado e que reforça estereótipos que são visto até em hobbies, como os jogos online.</div>
           <div class="Text">Até mesmo em jogos de fliperama ou vídeo games, personagens centrais eram masculinos ou o foco dos jogos eram para meninos. Em sites de jogos havia distinções de jogos focados para meninas, eram jogos da Barbie, de vestidos, de casa, de culinária. Até que começaram a ingressar no universo online em que se pode interagir em tempo real com seus personagens e de acordo com o seu gosto.</div>
           <div class="Text">Porém com eles vieram os preconceitos, a imersão feminina no cenário online não foi tão bem receptiva quanto esperada, afinal, precisavam se adaptar, algo que as pessoas do outro lado não tinham paciência em esperar, então “vai lavar a louça” ou “você não tinha que estar aqui”, até “este jogo não é para meninas” eram as frases mais ouvidas em partidas por mulheres.</div>
@@ -315,6 +320,7 @@
           <div class="Text">Outras questões também têm sido levantadas com o tempo. No início do ano, <a href="https://brasil.elpais.com/esportes/2021-02-08/assedio-sexual-estupro-e-racismo-a-onda-de-denuncias-que-furou-a-bolha-toxica-dos-gamers.html">cinco profissionais do cenário foram expostos por assédio e abusos nas redes sociais</a> desencadeando em diversos outros crimes que foram sendo explanados para fora da bolha gamer.</div>
           <div class="Text">Será que as mulheres têm liberdade para participar, treinar e competir nos cenários?</div>
 
+          <div class="CenteredImg"><img class="CenteredImg" src="/assets/images/WomanVoice.png" style="max-width: 700px;"></div>
           <h1>Voz às mulheres</h1>
           <div class="Text">Já está claro que o machismo afeta constantemente as mulheres e LGBTQIA+’s na sociedade, e o ambiente dos jogos online é apenas mais um espaço dominado por homens, no qual os casos de assédios, lgbtfobia, misoginia, etc, ficam ainda mais evidentes e recorrentes.</div>
           <div class="Text">A disparidade entre o número de homens e mulheres no esports, por exemplo, só demonstra tudo o que já foi dito, mas relatos de jogadoras deixam essa situação, mais que evidente, preocupante.</div>
@@ -322,8 +328,8 @@
           <div class="Text">Grande parte das mulheres e LGBTQIA+’s que responderam à pesquisa, disseram ter ouvido comentários preconceituosos, ofensivos e até mesmo criminosos de jogadores de League of Legends e Valorant, principalmente.</div>
           <div class="Text">As falas relatadas no formulário se assemelham às das entrevistadas Evelyn “Coelha”, streaming carioca profissional da Twitch, e Brenda Nunes, gamer amadora. Ambas afirmam que já se deparam com esses tipos de falas em chats e conversas por áudios dentro das partidas.</div>
           
-          <h1>Evelyn</h1>
-          <div class="Text">Evelyn tem 23 anos e é conhecida como ‘Coelha’ nos jogos eletrônicos que participa, como Valorant, LOL, Genshi e outros lançamentos. Começou profissionalmente na Twitch a pouco mais de um ano, com lives diárias para cumprir as metas da plataforma e conseguir, com isso, ajudar nas contas da casa.</div>
+          <h2>Evelyn</h2>
+          <div class="Text">Evelyn tem 23 anos e é conhecida como ‘Coelha’ nos jogos eletrônicos que participa, como Valorant, LOL, Genshi e outros lançamentos. Começou profissionalmente na <a href="https://www.twitch.tv/evecoelha">Twitch</a> a pouco mais de um ano, com lives diárias para cumprir as metas da plataforma e conseguir, com isso, ajudar nas contas da casa.</div>
           <div class="Text">Ela diz que o preconceito por ser mulher nos games já começa em seu nick. <i>“Só pelo meu nome ser coelha, já sabiam. “Tinha que ser mulher”, e ficavam me trolando, me sabotando no jogo. Isso aconteceu no Valorant, ficavam querendo me matar, ou me atrapalhar, me impedindo de jogar, isso aconteceu várias vezes, mas eu nunca deixei de mudar o meu nick por conta disso.”</i></div>
           <div class="Text">Já quando perguntada se em suas lives ela escuta os mesmos comentários machistas que nas partidas, comenta “Eu gosto de dizer que a minha live é a minha comunidade mesmo, o meu chat é a melhor coisa da minha live, todo mundo recepciona todos muito bem”.</div>
           <div class="Text">Mas mesmo assim há momentos difíceis, como podemos ver em um print disponibilizado por ela de um caso real de ataque de bots que aconteceu em uma de suas lives:</div>
@@ -341,7 +347,7 @@
           <div class="Text">Evelyn comenta também que o Valorant, mesmo com seus problemas, ainda é o jogo com mais representatividade feminina, tendo até mesmo conseguido entrar em um time como profissional paga. <i>“Valorant foi o meu primeiro FPS e eu sou apaixonada, larguei totalmente os meus 9 anos de league of legends, e eu consegui um time depois de um mês, remunerado ainda.”</i></div>
           <div class="Text">Mas não é sempre assim, outra jogadora competitiva do mesmo jogo, Brenda Nunes, relata ter desistido de fazer dos jogos uma atividade mais séria por conta do preconceito.</div>
         
-          <h1>Brenda</h1>
+          <h2>Brenda</h2>
           <div class="Text">Brenda Nunes, 17,  é, atualmente, uma jogadora amadora competitiva de Valorant, mas começou na vida gamer mais cedo, no vídeo game, em games como R6 e Fortnite.</div>
           <div class="Text">Ela é mais uma como tantas outras mulheres que escuta, rotineiramente, comentários preconceituosos em partidas, seja por apresentar apenas um nickname feminino, como por sua voz.</div>
           <div class="Text"><i>“No vídeo game era o meu nome real, tava lá Brenda, às vezes eu mal entrava e o pessoal já começava a falar alguma bosta, alguma coisa relacionada, tipo “ahh é mulher, é mulher não, é travesti” coisa bem desnecessária sabe, sendo que eu só entrei porque eu queria jogar, porque eu queria me divertir. Isso me desanimava total, então eu parava e ia assistir alguma coisa. Agora no computador eu troquei, mudei o meu nick.”</i></div>
@@ -355,8 +361,7 @@
           <div class="Text">Tanto Evelyn quanto Brenda já denunciaram jogadores que fizeram comentários preconceituosos, mas disseram que nem sempre têm retorno da empresa, e quando conseguem, não são claros quanto a atitude tomada contra aquele que foi reportado.</div>
           <div class="Text">Coelha ainda diz: <i>“Você vai mandar um report provavelmente aquela pessoa já tomou uns 500, já tem print pra caraca daquela pessoa xingando pra caraca e isso é de qualquer coisa e não tem um retorno, você não tem a resposta, o cara não vai ser banido, ele não vai ser punido, não vai acontecer nada com ele. Por isso as pessoas fazem o que fazem, porque elas sabem que não vão ser punidas e não vai acontecer nada com elas, então elas vão mais e mais propagando ódio de todas as formas e a maioria não tem coragem de dizer isso pessoalmente. Elas fazem porque sabem que não vai dar em nada e a internet é um mundo livre, e a pessoa fala o que quiser, seja em jogo, seja na internet, tik tok, instagram e tudo mais.”</i></div>
 
-          <h1>Projeto Sakuras com Thais Queiroz</h1>
-          <div class="CenteredImg"><a href="https://www.sakurasesports.com.br/"><img class="CenteredImg" src="/assets/images/SakuraLogo.png" style="max-width: 500px;"></a></div>
+          <div class="CenteredImg" style="margin: 35px 0px 10px;"><a href="https://www.sakurasesports.com.br/"><img class="CenteredImg" src="/assets/images/SakuraLogo.png" style="max-width: 500px;"></a></div>
           <div class="Text">A estudante de psicologia Thais Queiroz, de 24 anos, desejava ter uma mulher como inspiração no meio de jogos online. Infelizmente, Thais encontrou um meio majoritariamente masculino. </div>
           <div class="Text">Inspirada nisso, Thais criou em 2018, junto com outras mulheres, o Projeto Sakuras Esports, que tem como iniciativa trazer visibilidade às mulheres dentro do cenário gamer, incentivar a competitividade e estimular a parceria entre elas mesmas, tanto dentro quanto fora do jogo. Para isso o projeto fornece diversos mecanismos para o desenvolvimento das jogadoras de forma 100% gratuita, sendo por meio de campeonatos exclusivamente femininos, divulgação de material voltado para streaming e criação de conteúdo ou workshops de áreas específicas.  Atualmente, o projeto conta com mais de 100 mulheres voluntárias trabalhando diariamente para fazer tudo acontecer.</div>
           <div class="Text">Iniciativas como essa trazem a representatividade feminina no cenário gamer à tona. Segundo Thais, não faltavam mulheres nesse cenário, e sim representatividade. “Eu não tinha uma mulher para me inspirar, eu não conseguia achar uma mulher que trabalhasse nesse meio para me inspirar, somente homens”, disse Thais.</div>
@@ -373,11 +378,11 @@
       <div class="_flexCentered TextSection"  style="background-color: rgb(132, 83, 60);">
         <div class="TextBlock">
           
-          <div style="margin-bottom: 30px;" class="CenteredImg"><a href="https://www.sakurasesports.com.br/"><img class="CenteredImg" src="/assets/images/LawTimeline.png" ></a></div>
+          <div style="margin-bottom: 30px;" class="CenteredImg"><img class="CenteredImg" src="/assets/images/LawTimeline.png" ></div>
           
         </div>
         
-        <iframe class="YoutubeIFrame" src="https://www.youtube.com/embed/LWyozlCYhgo"  frameborder="0" allow="clipboard-write; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <iframe class="YoutubeIFrame" src="https://www.youtube.com/embed/l6pzU_n2Bg0"  frameborder="0" allow="clipboard-write; encrypted-media; picture-in-picture" allowfullscreen></iframe>
 
         <div class="TextBlock">
 
@@ -395,8 +400,8 @@
           <div class="Text">E isso é costumeiro, como também mostra a imagem tirada do, já citado, formulário realizado pela equipe Report sobre preconceitos nos jogos eletrônicos. Os ataques racistas só são levados adiante com denúncias quando acontecem em lives grandes e com jogadores reconhecidos, senão, viram apenas estatística de crime e impunidade.  </div>
           <div class="Text">Em entrevista com os jogadores Suzane Gomes e João Lucas Isidorio Miranda, o peso de ser uma pessoa preta no ambiente dos jogos eletrônicos fica evidente, mas não supera a vontade de marcar presença em um espaço que deve ser de todos.</div>
         
-          <h1>Suzane “sazuneeee”</h1>
-          <div class="Text">Suzane Gomes, 25, é streamer da Twitch e da Booyah, transmitindo jogos como CS:GO e Valorant. Apesar de ser formada em Ciências da Computação, faz as lives de forma séria, mas também a usa para interagir com sua comunidade de um modo descontraído e divertido, fazendo o que sempre gostou: jogar.</div>
+          <h2>Suzane “sazuneeee”</h2>
+          <div class="Text">Suzane Gomes, 25, é streamer da <a href="https://www.twitch.tv/sazuneeee">Twitch</a> e da Booyah, transmitindo jogos como CS:GO e Valorant. Apesar de ser formada em Ciências da Computação, faz as lives de forma séria, mas também a usa para interagir com sua comunidade de um modo descontraído e divertido, fazendo o que sempre gostou: jogar.</div>
           <div class="Text"><i>“Minha comunidade ainda não é tão grande, mas tem uma galera que está sempre ali, tudo o que eu faço, tudo o que eu posto, eles sempre me dão muito apoio. [...] É um pessoal que já virou até amigo já.”</i></div>
           <div class="Text">Sua trajetória nos games começou na infância, jogando no console Super Nintendo com seu pai e sua irmã.<i>“Eu sempre via meu pai jogando, a minha irmã também jogava videogame, e aí, quando todo mundo parou, eu continuei, só que então eu fui para o PC, comecei a jogar no computador.”</i></div>
           <div class="Text">Depois disso, entre 2014 e 2015, Suzane criou um canal no YouTube de gameplays, mas apenas gravava e colocava edições por cima. Com esse início bem diferente do que é hoje, foi incentivada por amigos a começar a fazer lives e assim iniciou tímida e esporadicamente.</div>
@@ -416,7 +421,7 @@
           <div class="Text">Sendo assim, a vivência de Suzane Gomes nos jogos eletrônicos é mostrada como animadora e positiva, superando tudo que escuta e escutou de negativo e sendo apoiada por quem acredita em seu trabalho e se identifica com sua caminhada.</div>
           <div class="Text">Mas não é sempre que este lado prevalece. João nos mostra um lado mais sério e denso do preconceito racial nos games.</div>
 
-          <h1>João Lucas</h1>
+          <h2>João Lucas</h2>
           <div class="Text">João Lucas, de 23 anos, é do Rio de Janeiro e é o retrato da maior parte dos gamers brasileiros: joga apenas para se divertir, conversar com os amigos nas partidas e desestressar da rotina.</div>
           <div class="Text">Mas não é sempre que seu hobbie representa um momento tranquilo. Os prints mostrados no vídeo acima retratam bem o preconceito racial enraizado no nosso país. </div>
           <div class="Text">Neste caso, segundo João, quando percebeu que as ofensas não paravam, resolveu printar sua tela a fim de usar as imagens como provas para denunciar o seu agressor para a desenvolvedora do jogo, a Riot. Porém, a devolutiva da empresa não foi suficiente.</div>
@@ -437,7 +442,7 @@
           <div class="Text Quote">“Pra mim o principal problema é como funciona a cabeça da pessoa. Eu sei que eu sou negro, você falar isso pra mim não muda nada na minha vida, eu olho no espelho e pra mim isso não é nenhum motivo pra eu me envergonhar ou me sentir menor, eu sei que eu sou negro. [...] O principal problema é como você enxerga ou como você pensa sobre isso na sua vida, na sua cabeça. Porque você tá me xingando achando que isso é ser menor, então você acha que a pessoa negra é menor que você, mas ela não é.”</div>
           <div class="Text">Para entendermos melhor a questão de como funciona o preconceito e por que ele ocorre, a equipe Report teve a ajuda da psicóloga Beatriz Godói.</div>
 
-          <h1>Beatriz Godói</h1>
+          <h2>Beatriz Godói</h2>
           <div class="Text">Para entendermos melhor a questão de como funciona o preconceito e por que ele ocorre, a equipe Report teve a ajuda da psicóloga Beatriz Godoi, de 43 anos, Bragança Paulista – São Paulo.</div>
           <div class="Text">A profissional cita a construção da sociedade, toda a base estrutural sendo regida por pré conceitos fundamentados e estudados pela história, antropologia e psicanálise, algo que vem sido levado até os dias atuais e tomando novas proporções por conta da internet.</div>
           <div class="Text">Referente a mesma indagação enfrentada por João Lucas, Beatriz aponta sobre o conforto que os agressores sentem ao proferirem ataques de ódio no meio das partidas. “As redes sociais propiciam os ataques, pois é uma possibilidade das pessoas falarem, emitirem suas opiniões, sem a princípio, confrontar com o outro, cara a cara”.</div>
@@ -445,10 +450,10 @@
           <div class="Text">Estar em um lugar competitivo pode ser benéfico para uns, trazendo o lado esportivo entre concorrentes, porém, em ambientes online tem-se visto outro tipo de experiência, gerando um comportamento maléfico para os demais. No caso de todas as personalidades apresentadas ao longo desta reportagem, seja a trabalho ou como um hobbie, estar em meios cujo preconceito prevalece pode colocar em risco sua saúde mental. </div>
           <div class="Text">Afinal, tais preconceitos podem vir de forma sutis também, sendo camuflados inclusive na cabeça da vítima que não consegue identificar o que está sentindo. A psicóloga explica: “Não se trata de uma situação natural, mas envolve uma construção histórica, social. Por vezes, entranha-se em uma interseccionalidade, que seria: classe social, questão racial, gênero. Por fim, envolve as fantasias e as atribuições de valores de cada pessoa. Eles se normatizam e se encerram apenas na descrição destes.”</div>
           <div class="Text">Apesar de ser árdua a trajetória na internet, a própria comunidade do esports vem se esforçando para reforçar a necessidade da representatividade e trazer conforto para todos que buscam se entreter no ciberespaço. </div>
-          <div class="Text">Suzane relembra dos ataques que a streammer Sher Machado sofreu em suas lives. O quão inspirador foi para ela ver a jogadora não se abalar. Isso é algo que a motiva a trabalhar mais em suas transmissões. Assim como ressaltado pela psicóloga “Mesmo tendo conflitos, crises, dar voz às narrativas diversas, com certeza é um ganho tremendo para a humanidade”.</div>
+          <div class="Text">Suzane relembra dos ataques que a streamer Sher Machado sofreu em suas lives. O quão inspirador foi para ela ver a jogadora não se abalar. Isso é algo que a motiva a trabalhar mais em suas transmissões. Assim como ressaltado pela psicóloga “Mesmo tendo conflitos, crises, dar voz às narrativas diversas, com certeza é um ganho tremendo para a humanidade”.</div>
 
           <h1>A Luta Não Para</h1>
-          <div class="Text">Campanhas vêm sendo realizadas para a diminuição dos ataques na internet, recentemente, o Globo Esportes lançou a #respeitoehojogo como uma iniciativa para combater o racismo nos jogos online. O SBT Games também destacou, no Mês da Consciência Negra, a importância de termos diversidade e representatividade no cenário gamer. A luta contra o preconceito também é representada em projetos como Sakuras, Wakanda e a Copa Rebecca Heineman - destinada apenas a pessoas transexuais e transgêneros, dentre outros projetos.</div>
+          <div class="Text">Campanhas vêm sendo realizadas para a diminuição dos ataques na internet, recentemente, o <a href="https://ge.globo.com/esports/noticia/ge-lanca-campanha-contra-racismo-e-incentiva-a-diversidade-nos-esports.ghtml">Globo Esportes</a> lançou a #respeitoehojogo como uma iniciativa para combater o racismo nos jogos online. O <a href="https://twitter.com/SBT_Games/status/1463206069858091008">SBT Games</a> também destacou, no Mês da Consciência Negra, a importância de termos diversidade e representatividade no cenário gamer. A luta contra o preconceito também é representada em projetos como Sakuras, Wakanda e a Copa Rebecca Heineman - destinada apenas a pessoas transexuais e transgêneros, dentre outros projetos.</div>
           <div class="Text">A internet é um espaço para todos poderem usufruir, independentemente de sua cor, credo ou gênero. Jogos online nasceram com o intuito de entreter, divertir e passar o tempo, e hoje destacam-se, além destes quesitos, por estarem no âmbito competitivo e gerarem empregos. </div>
           <div class="Text">Assim, não dá pra tolerar e deixar o ódio continuar se manifestando entre as partidas. O melhor a se fazer é denunciar e apoiar aqueles que sofreram com os ataques: </div>
           <div class="Text Quote">“A melhor atitude seria o acolhimento, o apoio, a escuta e o encorajamento para a procura de atendimento psicológico; se acaso haja o desejo. Do mesmo modo, dar voz às pessoas, ampliar o lugar de fala nas instituições, sociedade é uma tremenda ação que favorece a saúde mental e a progressão de uma cultura”, defende a psicóloga.</div>
