@@ -220,7 +220,7 @@
   font-size: clamp(25px, 2.3vw, 40px);
   margin: 40px 0px 20px;
   text-align: left;
-  font-weight: 300;
+  font-weight: bold;
 }
 
 .Separator {
